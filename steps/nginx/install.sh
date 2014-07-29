@@ -1,1 +1,1 @@
-  apt-get install -y --force-yes nginx
+apt-get install -y --force-yes nginx

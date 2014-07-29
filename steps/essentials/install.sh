@@ -1,2 +1,1 @@
-# install radiodan essentials
-  apt-get install -y vim rabbitmq-server
+apt-get install -y vim htop
