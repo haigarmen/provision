@@ -1,7 +1,8 @@
 require "open3"
-require 'logger'
+require "logger"
+require "tempfile"
 
-LOG_LEVEL = ENV.has_key?('LOG_LEVEL') ? ENV['LOG_LEVEL'].upcase : 'INFO'
+LOG_LEVEL = ENV.has_key?("LOG_LEVEL") ? ENV["LOG_LEVEL"].upcase : "INFO"
 ROOT = File.dirname(__FILE__)
 
 Console = Logger.new(STDOUT)
@@ -40,7 +41,7 @@ module Steps
     @config_steps  = []
     @failed_steps  = []
 
-    if step_name === 'all'
+    if step_name === "all"
       enqueue_all
     else
       enqueue(step_name)
@@ -55,14 +56,14 @@ module Steps
   end
 
   def self.valid_steps
-    @valid_steps ||= ['all'] +
-      Dir.entries(ROOT+"/steps").reject{|x| x[0] == '.' || x[0] == '_' }
+    @valid_steps ||= ["all"] +
+      Dir.entries(ROOT+"/steps").reject{|x| x[0] == "." || x[0] == "_" }
   end
 
   def self.enqueue_all
-    enqueue('_pre_install')
+    enqueue("_pre_install")
     valid_steps.each{|s| enqueue(s)}
-    enqueue('_post-install')
+    enqueue("_post-install")
   end
 
   def self.enqueue(step_name)
@@ -72,7 +73,7 @@ module Steps
 
   def self.execute!
     @install_steps.each do |step|
-      script = parse_script(step, 'install')
+      script = parse_script(step, "install")
 
       unless script
         Console.warn "No install step for #{step}"
@@ -95,7 +96,7 @@ module Steps
         return
       end
 
-      script = parse_script(step, 'config')
+      script = parse_script(step, "configure")
 
       unless script
         Console.warn "No config step for #{script}"
@@ -114,10 +115,18 @@ module Steps
 
   def self.parse_script(step, script_name)
     dir = File.join(ROOT, "steps", step)
+    conf_dir = File.join(dir, "files")
     file = File.join(dir, "#{script_name}.sh")
 
     if File.exist?(file)
-      file
+      src = File.read(file)
+      parsed = src.gsub "{RADIODAN_CONF}", conf_dir
+
+      tmp = Tempfile.new("#{script_name}_#{step}")
+      tmp.write parsed
+      tmp.close
+
+      tmp.path
     else
       false
     end
