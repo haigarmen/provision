@@ -24,5 +24,5 @@ Quick way
 3. Log in again
 4. curl -L http://git.io/lhbivA | sudo sh
 5. `sudo reboot`
-6. `cd radiodan-setup`
+6. `cd mineblock-setup`
 7. `sudo sh install.sh`

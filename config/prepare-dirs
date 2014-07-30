@@ -18,7 +18,7 @@ ROOTPATH=/var/log
 case "${1:-''}" in
   start)
     # create the /var/log/nginx needed by webserver
-    for DIR in mpd samba nginx radiodan
+    for DIR in mpd samba nginx mineblock
     do
       if [ ! -d ${ROOTPATH}/${DIR} ]; then
         mkdir ${ROOTPATH}/${DIR}

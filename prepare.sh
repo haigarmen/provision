@@ -1,10 +1,10 @@
-## Radiodan setup steps
+## Mineblock setup steps
 
 # extract installation files
-  RADIODAN_FS=/home/pi/radiodan-setup
+  MINEBLOCK_FS=/home/pi/mineblock-setup
 
-  mkdir -pv ${RADIODAN_FS} && \
-    curl -L https://github.com/pixelblend/provision/archive/master.tar.gz | tar xz --strip-components 1 -C ${RADIODAN_FS}
+  mkdir -pv ${MINEBLOCK_FS} && \
+    curl -L https://github.com/pixelblend/provision/archive/master.tar.gz | tar xz --strip-components 1 -C ${MINEBLOCK_FS}
 
 # create .ssh dir to place authorised_keys later
   mkdir -pv /home/pi/.ssh

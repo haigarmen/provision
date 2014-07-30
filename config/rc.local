@@ -19,4 +19,7 @@ fi
 #/usr/local/bin/install_apps > /var/log/radiodan/install_apps_log.txt 2>&1
 #/usr/local/bin/start_apps > /var/log/radiodan/start_apps_log.txt 2>&1
 
+# start the minecraft server now
+#./opt/MineCraft/start.sh
+
 exit 0
