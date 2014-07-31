@@ -1,6 +1,6 @@
 server {
   listen 80;
-  root /opt/radiodan/adhoc/;
+  root /opt/mineblock/adhoc/;
 
   location / {
     return 511;
@@ -10,7 +10,7 @@ server {
 
   location @status511 {
     sub_filter_once off;
-    sub_filter 'raspberrypi.local' $host;
+    sub_filter 'mineblock.local' $host;
     rewrite ^(.*)$ /status511.html break;
   }
 }
