@@ -14,6 +14,11 @@
     rm -rfv /home/pi/Desktop && \
     rm -rfv /home/pi/ocr_pi.png
 
+
+# set jessie as main source of packages
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak && \
+    sed -i -e 's/ \(stable\|wheezy\)/ testing/ig' /etc/apt/sources.list
+
 # clean up distro
   apt-get update
 
